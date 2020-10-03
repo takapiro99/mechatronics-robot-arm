@@ -3,6 +3,8 @@
 
 #include <sci_emaru.c>
 
+// 距離センサーで kadai62 の計測から求めた近似に基づいた距離を表示する
+
 /***AD 変換用構造体設定***/
 typedef struct {
   _WORD DATA : 10;
