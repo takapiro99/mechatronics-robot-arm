@@ -2,6 +2,8 @@
 
 #include <sci_emaru.c>
 
+// 可変抵抗の値を 0~1023 で表示する
+
 /***AD 変換用構造体設定***/
 typedef struct {
   _WORD DATA : 10;
