@@ -1,7 +1,6 @@
 #include <3664.h>
 #include <math.h>
-
-#include <sci_emaru.c>
+#include <sci.c>
 
 // 距離センサーで kadai62 の計測から求めた近似に基づいた距離を表示する
 
@@ -13,10 +12,10 @@ typedef struct {
 
 /***H8/3664 内部 IO 初期設定***/
 void InitH8(void) {
-  AD.ADCSR.BYTE = 0;      // A/D 変換停?
-  AD.ADCSR.BIT.ADIE = 0;  // A/D 変換割り込み禁?
+  AD.ADCSR.BYTE = 0;      // A/D 変換停止
+  AD.ADCSR.BIT.ADIE = 0;  // A/D 変換割り込み禁止
   AD.ADCSR.BIT.SCAN = 1;  // スキャンモード
-  AD.ADCSR.BIT.CKS = 1;   // ?速変換
+  AD.ADCSR.BIT.CKS = 1;   // 高速変換
   AD.ADCSR.BIT.CH = 3;    // AN3
   AD.ADCSR.BIT.ADST = 1;  // A/D 変換スタート
   TA.TMA.BYTE = 0x03;     /* 時計用クロック */
@@ -26,7 +25,7 @@ void TAwait(int ms) {
   int i;
   for (i = 0; i <= ms; i++) {
     while (IRR1.BIT.IRRTA == 0)
-      ;  // TCA(TCNT) =オーバーフロー(GRA)になるまで待つ
+      ;  // TCA(TCNT) = オーバーフロー(GRA)になるまで待つ
     IRR1.BIT.IRRTA = 0;  // 検知ﾌﾗｸﾞを戻して再開
   }
 }
